@@ -31,7 +31,7 @@ public class MailServiceImpl implements MailService {
 
 			mailSender.send(mimeMessage);
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 
@@ -54,7 +54,7 @@ public class MailServiceImpl implements MailService {
 
 			mailSender.send(mimeMessage);
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 

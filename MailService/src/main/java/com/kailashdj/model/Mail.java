@@ -1,8 +1,12 @@
 package com.kailashdj.model;
 
+import javax.validation.constraints.Email;
+
 public class Mail {
 
+	@Email
 	private String mailFrom;
+	@Email
 	private String mailTo;
 	private String mailSubject;
 	private String mailContent;
