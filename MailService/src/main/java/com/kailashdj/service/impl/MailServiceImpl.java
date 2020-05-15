@@ -16,12 +16,12 @@ import com.kailashdj.service.MailService;
 public class MailServiceImpl implements MailService {
 
 	@Autowired
-	private JavaMailSender mailSender;
+	private JavaMailSender javaMailSender;
 
 	@Override
 	public void sendMail(Mail mail) throws MessagingException {
 
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
 		try {
 			mimeMessageHelper.setSubject(mail.getMailSubject());
@@ -29,7 +29,7 @@ public class MailServiceImpl implements MailService {
 			mimeMessageHelper.setFrom(mail.getMailFrom());
 			mimeMessageHelper.setTo(mail.getMailTo());
 
-			mailSender.send(mimeMessage);
+			javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
 			
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void sendMailWithAttachment(Mail mail) throws MessagingException {
 
-		MimeMessage mimeMessage = mailSender.createMimeMessage();
+		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 		try {
 			mimeMessageHelper.setSubject(mail.getMailSubject());
@@ -52,7 +52,7 @@ public class MailServiceImpl implements MailService {
 			mimeMessageHelper.addAttachment(file.getFilename() , file);
 			
 
-			mailSender.send(mimeMessage);
+			javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
 			
 			e.printStackTrace();

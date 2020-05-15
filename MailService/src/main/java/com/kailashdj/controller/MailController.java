@@ -16,7 +16,7 @@ public class MailController {
 	private MailServiceImpl mailService;
 	
 	@RequestMapping(value = "/sendemail")
-	public String sendMail() throws MessagingException {
+	public String sendMail() throws MessagingException  {
 		Mail mail = new Mail();
 		mail.setMailFrom("kailashdjniraula9@gmail.com");
 		mail.setMailTo("badri@ncit.edu.np");
