@@ -22,16 +22,41 @@ public class MailServiceImpl implements MailService {
 	public void sendMail(Mail mail) throws MessagingException {
 
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage,true);
+		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 		try {
 			mimeMessageHelper.setSubject(mail.getMailSubject());
 			mimeMessageHelper.setText(mail.getMailContent());
 			mimeMessageHelper.setFrom(mail.getMailFrom());
 			mimeMessageHelper.setTo(mail.getMailTo());
+			
+			String name = mail.getMailTo().split("@")[0];
+			
+			mimeMessage.setContent(
+					"<html>"
+					+"<head>"
+					+ "<h1>Hello&nbsp;"+ name +"</h1>"
+					+"</head>"
+					+ "<body>"
+					+ "<p>"
+					+ "Please click the button below"
+					+ "or use the following url to reset your password."
+					+ "<button>"
+					+ "Reset Password"
+					+ "</button>"
+					+ "</p>"
+					+ "<p>"
+					+ "With Regards"
+					+ "<br>"
+					+ "Kailashdj Niraula"
+					+ "</p>"
+					+ "</body>"
+					+ "</html>"
+					+mail.getMailTo(),
+					"text/html");
 
 			javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -49,12 +74,11 @@ public class MailServiceImpl implements MailService {
 			mimeMessageHelper.setTo(mail.getMailTo());
 
 			FileSystemResource file = new FileSystemResource("D:\\Wallpapers\\383271.jpg");
-			mimeMessageHelper.addAttachment(file.getFilename() , file);
-			
+			mimeMessageHelper.addAttachment(file.getFilename(), file);
 
 			javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
-			
+
 			e.printStackTrace();
 		}
 
